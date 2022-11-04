@@ -1,0 +1,35 @@
+
+@model List<Cadeteria.Models.Cadete>
+@{
+    ViewData["Title"] = "Listado de cadetes";
+}
+<table class="table table-striped">
+    <caption>Cadetes</caption>
+    <thead>
+        <tr>
+            <th>ID</th>
+            <th>Nombre</th>
+            <th>Dirección</th>
+            <th>Teléfono</th>
+            <th>Editar</th>
+            <th>Eliminar</th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var cadete in Model)
+        {
+            <tr>
+                <td>@cadete.ID</td>
+                <td>@cadete.Nombre</td>
+                <td>@cadete.Direccion</td>
+                <td>@cadete.Telefono</td>
+                <td><a href="#"><button type="button" class="btn btn-warning">Editar</button></a></td>
+                <td><a href="Baja?id=@cadete.ID"><button type="button" class="btn btn-danger">Eliminar</button></a></td>
+            </tr>
+        }
+    </tbody>
+</table>
+
+<table class="table table-striped">
+  ...
+</table>
