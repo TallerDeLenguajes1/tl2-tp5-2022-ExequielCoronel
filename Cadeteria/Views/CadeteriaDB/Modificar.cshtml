@@ -1,0 +1,32 @@
+@model ModificarCadeteViewModel
+@{
+    ViewData["Title"] = "Modificar Cadete";
+}
+
+<h1>@ViewData["Title"]</h1>
+<form method="post" asp-action="ConfirmarModificado">
+  <div class="row mb-3">
+    <label for="Nom" class="col-sm-2 col-form-label" asp-for="nombre">Nombre</label>
+    <div class="col-sm-10">
+      <input type="text" class="form-control" id="Nom" placeholder="Nombre del cadete" name="nombre" asp-for="nombre" value="@Model.nombre">
+    </div>
+  </div>
+  <div class="row mb-3">
+    <label asp-for="direccion" for="Dir" class="col-sm-2 col-form-label">Dirección</label>
+    <div class="col-sm-10">
+      <input asp-for="direccion" type="text" class="form-control" id="Dir" placeholder="Dirección del cadete" name=direccion value="@Model.direccion">
+    </div>
+  </div>
+  <div class="row mb-3">
+    <label for="Tel"  asp-for="telefono" class="col-sm-2 col-form-label">Teléfono</label>
+    <div class="col-sm-10">
+      <input type="number" asp-for="telefono"class="form-control" id="Tel" name="telefono" placeholder="Teléfono del cadete" value="@Model.telefono">
+    </div>
+  </div>
+   <button type="submit" class="btn btn-primary">Confirmar</button>
+   <button type="reset" class="btn btn-primary">Reiniciar</button>
+</form>
+
+@section Scripts {
+  <partial name="_ValidationScriptsPartial" />
+}

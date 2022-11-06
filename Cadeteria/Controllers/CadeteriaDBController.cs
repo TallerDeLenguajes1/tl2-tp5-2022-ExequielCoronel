@@ -16,11 +16,18 @@ public class CadeteriaDBController : Controller
     }
 
     [HttpPost]
-    public IActionResult Alta(IFormCollection cadete)
+    public IActionResult Alta(AltaCadeteViewModel cadete)
     {
-        ControlCSV controlCSV = new ControlCSV(path);
-        controlCSV.EscribirEnCSV(cadete);
-        return View();
+        if(ModelState.IsValid)
+        {
+            Cadete nuevocadete = new Cadete(cadete.nombre, cadete.direccion, cadete.telefono);
+            String strCadete = nuevocadete.ID + ";" + nuevocadete.Nombre + ";" + nuevocadete.Direccion + ";" + nuevocadete.Telefono;
+            ControlCSV controlCSV = new ControlCSV(path);
+            controlCSV.EscribirEnCSV(strCadete);
+            return View();
+        } else {
+            return RedirectToAction("Error");
+        }
     }
 
     public IActionResult MostrarCadetes()
@@ -37,5 +44,38 @@ public class CadeteriaDBController : Controller
         controlCSV.ElminarLinea(id);
         ViewData["IDCadete"] = id;
         return View();
+    }
+
+    [HttpGet]
+    public IActionResult Modificar(int id)
+    {
+        ControlCSV controlCSV = new ControlCSV(path);
+        List<Cadete> listado = controlCSV.ObtenerLista();
+        Cadete cadeteAModificar = new Cadete();
+        foreach (var item in listado)
+        {
+            if(id == item.ID)
+            {
+                cadeteAModificar = item;
+            }
+        }
+        ModificarCadeteViewModel cadeteView = new ModificarCadeteViewModel(cadeteAModificar.ID,cadeteAModificar.Nombre,cadeteAModificar.Direccion,cadeteAModificar.Telefono); 
+        return View(cadeteView);
+    }
+
+    [HttpPost]
+    public IActionResult ConfirmarModificado(ModificarCadeteViewModel cadete)
+    {
+        if(ModelState.IsValid)
+        {
+            ControlCSV controlCSV = new ControlCSV(path);
+            controlCSV.ElminarLinea(cadete.id);
+            String strEdit = cadete.id + ";" + cadete.nombre + ";" + cadete.direccion + ";" + cadete.telefono;
+            controlCSV.EscribirEnCSV(strEdit);
+            ViewData["IDCadete"] = cadete.id;
+            return View();
+        } else {
+            return RedirectToAction("Error");
+        }
     }
 }

@@ -7,7 +7,7 @@ namespace Cadeteria.Models;
         {
             DatosReferenciaDireccion = "";
         }        
-        public Cliente(string DatosReferenciaDireccion, string Nombre, uint Telefono, string Direccion):base(Nombre, Direccion, Telefono)
+        public Cliente(string DatosReferenciaDireccion, string Nombre, long Telefono, string Direccion):base(Nombre, Direccion, Telefono)
         {
             this.DatosReferenciaDireccion = DatosReferenciaDireccion;
         }

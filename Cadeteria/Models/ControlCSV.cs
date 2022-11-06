@@ -5,11 +5,10 @@ class ControlCSV
     private string RutaArchivoCSV;
 
     public ControlCSV(string path){RutaArchivoCSV=path;}
-    public void EscribirEnCSV(IFormCollection cadete)
+    public void EscribirEnCSV(String cadena)
     {
-        Cadeteria.Models.Cadete nuevoCadete = new Cadeteria.Models.Cadete(cadete["nombre"],cadete["direccion"],Convert.ToUInt32(cadete["telefono"]));
         StreamWriter archivo = new System.IO.StreamWriter(RutaArchivoCSV,true);
-        archivo.WriteLine(nuevoCadete.ID + ";" + nuevoCadete.Nombre + ";" + nuevoCadete.Direccion + ";" + nuevoCadete.Telefono);
+        archivo.WriteLine(cadena);
         archivo.Close();
     }
 

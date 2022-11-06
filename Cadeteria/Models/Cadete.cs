@@ -6,12 +6,12 @@ namespace Cadeteria.Models;
 
         List<Pedido> Pedidos;
 
-        public Cadete(string Nombre, string Direccion, uint Telefono):base(Nombre, Direccion, Telefono)
+        public Cadete(string Nombre, string Direccion, long Telefono):base(Nombre, Direccion, Telefono)
         {
             Pedidos = new List<Pedido>();
         }
 
-        public Cadete(long id,string Nombre, string Direccion, uint Telefono):base(id,Nombre,Direccion,Telefono){Pedidos = new List<Pedido>();}
+        public Cadete(long id,string Nombre, string Direccion, long Telefono):base(id,Nombre,Direccion,Telefono){Pedidos = new List<Pedido>();}
 
         public Cadete():base()
         {
