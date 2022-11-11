@@ -1,0 +1,31 @@
+@model List<Pedido>
+@{
+    ViewData["tittle"] = "Listado de Pedidos";
+}
+
+<table class="table table-striped">
+    <caption>Pedidos</caption>
+    <thead>
+        <tr>
+            <th>Numero</th>
+            <th>Observación</th>
+            <th>Estado Pedido</th>
+            <th>ID Cliente</th>
+            <th>Editar</th>
+            <th>Eliminar</th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var pedido in Model)
+        {
+            <tr>
+                <td>@pedido.Numero</td>
+                <td>@pedido.Observacion</td>
+                <td>@pedido.Estado</td>
+                <td>@pedido.IDCliente1</td>
+                <td><a href="#"><button type="button" class="btn btn-warning">Editar</button></a></td>
+                <td><a href="EliminarPedido?Numero=@pedido.Numero"><button type="button" class="btn btn-danger">Eliminar</button></a></td>
+            </tr>
+        }
+    </tbody>
+</table>

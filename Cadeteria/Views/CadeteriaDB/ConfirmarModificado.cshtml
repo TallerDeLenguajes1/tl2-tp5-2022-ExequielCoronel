@@ -1,0 +1,9 @@
+@{
+    ViewData["Title"] = "Confirmar Modificado";
+}
+<h1>Cadete de ID: @ViewData["IDCadete"] modificado con Exito!</h1>
+
+<script LANGUAGE=javascript>
+    document.write("Redireccionando a la pagina MostrarCadetes");
+    setTimeout( function() { window.location.href = "MostrarCadetes"; }, 2000 );
+</script>

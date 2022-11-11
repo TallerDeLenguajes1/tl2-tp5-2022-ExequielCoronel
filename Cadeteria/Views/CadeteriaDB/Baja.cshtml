@@ -1,0 +1,9 @@
+@{
+    ViewData["Title"] = "Baja cadete";
+}
+<h1>@ViewData["Title"]</h1>
+<h2>Se elimino con exito al cadete de ID: @ViewData["IDCadete"]</h2>
+<script LANGUAGE=javascript>
+    document.write("Regresando a la pagina anterior...");
+    setTimeout("window.history.go(-1)",3000);
+</script>

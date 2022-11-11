@@ -1,0 +1,47 @@
+@model AltaPedidoViewModel
+@{
+    ViewData["Title"] = "Alta Pedido";
+}
+
+<h1>@ViewData["Title"]</h1>
+<form method="post" asp-action="AltaPedido">
+  <div class="row mb-3">
+    <label for="Obs" class="col-sm-2 col-form-label" asp-for="Observacion">Observación: </label>
+    <div class="col-sm-10">
+      <input type="text" class="form-control" id="Obs" placeholder="Observacion del Pedido" name="Observacion" asp-for="Observacion">
+    </div>
+  </div>
+  <fieldset>
+    <legend>Datos del Cliente</legend>
+    <div class="row mb-3">
+      <label for="Nom" class="col-sm-2 col-form-label" asp-for="NombreCliente">Nombre: </label>
+      <div class="col-sm-10">
+        <input type="text" class="form-control" id="Nom" placeholder="Nombre del Cliente" name="NombreCliente" asp-for="NombreCliente">
+      </div>
+    </div>
+    <div class="row mb-3">
+      <label for="Tel" class="col-sm-2 col-form-label" asp-for="TelefonoCliente">Telefono: </label>
+      <div class="col-sm-10">
+        <input type="text" class="form-control" id="Tel" placeholder="Telefono del Cliente" name="TelefonoCliente" asp-for="TelefonoCliente">
+      </div>
+    </div>
+    <div class="row mb-3">
+      <label for="Dir" class="col-sm-2 col-form-label" asp-for="DireccionCliente">Dirección: </label>
+      <div class="col-sm-10">
+        <input type="text" class="form-control" id="Dir" placeholder="Direccion del Cliente" name="DireccionCliente" asp-for="DireccionCliente">
+      </div>
+    </div>
+    <div class="row mb-3">
+      <label for="Ref" class="col-sm-2 col-form-label" asp-for="ReferenciaDireccionCliente">Referencia: </label>
+      <div class="col-sm-10">
+        <input type="text" class="form-control" id="Ref" placeholder="Referencia de la dirección del Cliente" name="ReferenciaDireccionCliente" asp-for="ReferenciaDireccionCliente" value="Sin Referencia">
+      </div>
+    </div>
+  </fieldset>
+   <button type="submit" class="btn btn-primary">Cargar</button>
+   <button type="reset" class="btn btn-primary">Limpiar</button>
+</form>
+
+@section Scripts {
+  <partial name="_ValidationScriptsPartial" />
+}
