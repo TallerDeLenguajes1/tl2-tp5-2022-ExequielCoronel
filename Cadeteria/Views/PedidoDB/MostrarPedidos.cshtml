@@ -13,6 +13,7 @@
             <th>ID Cliente</th>
             <th>Editar</th>
             <th>Eliminar</th>
+            <th>Cadete</th>
         </tr>
     </thead>
     <tbody>
@@ -23,8 +24,14 @@
                 <td>@pedido.Observacion</td>
                 <td>@pedido.Estado</td>
                 <td>@pedido.IDCliente1</td>
-                <td><a href="#"><button type="button" class="btn btn-warning">Editar</button></a></td>
+                <td><a href="ModificarPedido?Numero=@pedido.Numero"><button type="button" class="btn btn-warning">Editar</button></a></td>
                 <td><a href="EliminarPedido?Numero=@pedido.Numero"><button type="button" class="btn btn-danger">Eliminar</button></a></td>
+                @if(pedido.CadeteAsignado)
+                {
+                    <td><a href="CambiarCadete?Numero=@pedido.Numero"><button type="button" class="btn btn-warning">Cambiar cadete</button></a></td>
+                } else {
+                    <td><a href="AsignarCadete?Numero=@pedido.Numero"><button type="button" class="btn btn-success">Asignar cadete</button></a></td>
+                }
             </tr>
         }
     </tbody>

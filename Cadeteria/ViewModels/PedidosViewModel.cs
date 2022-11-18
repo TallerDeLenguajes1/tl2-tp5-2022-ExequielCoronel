@@ -9,9 +9,6 @@ using System.Threading.Tasks;
 
 public class AltaPedidoViewModel
 {
-    [Required]
-    public int Estado{get ; set ;}
-
     [Required, Range(0,9999999999)]
     public long Numero{get; set;}
 
@@ -33,7 +30,6 @@ public class AltaPedidoViewModel
     
     public AltaPedidoViewModel(long Numero,string Observacion, string NombreCliente, long TelefonoCliente, string DireccionCliente, string? ReferenciaDireccionCliente)
     {
-        Estado = 0;
         this.Numero = Numero;
         this.Observacion = Observacion;
         this.NombreCliente = NombreCliente;
@@ -42,4 +38,19 @@ public class AltaPedidoViewModel
         this.ReferenciaDireccionCliente = ReferenciaDireccionCliente;
     }
     public AltaPedidoViewModel(){}
+}
+
+public class ModificarPedidoViewModel
+{
+    [Required]
+    public long Numero {get; set;}
+    [Required, MaxLength(100), MinLength(10)]
+    public string Observacion{get; set;} 
+
+    public ModificarPedidoViewModel(){}
+    public ModificarPedidoViewModel(long numero,string Observacion)
+    {
+        Numero = numero;
+        this.Observacion = Observacion;
+    }
 }

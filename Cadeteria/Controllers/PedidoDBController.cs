@@ -27,7 +27,8 @@ public class PedidoDBController : Controller
             controlCSVCliente.EscribirEnCSV(strCliente);
             ControlCSV controlCSVPedido = new ControlCSV(pathP);
             long NumPedido = controlCSVPedido.NumeroAltaPedido();
-            String strPedido = NumPedido + ";" + pedidoView.Observacion + ";" + pedidoView.Estado + ";" + IDCliente;
+            Pedido pedidoA = new Pedido(NumPedido,pedidoView.Observacion,IDCliente);
+            String strPedido = pedidoA.Numero + ";" + pedidoA.Observacion + ";" + pedidoA.Estado + ";" + pedidoA.IDCliente1 + ";" + pedidoA.CadeteAsignado;
             controlCSVPedido.EscribirEnCSV(strPedido);
             return View();
         } else {
@@ -51,5 +52,21 @@ public class PedidoDBController : Controller
         return View();
     }
 
-    
+    [HttpGet]
+    public IActionResult ModificarPedido(long Numero)
+    {
+        ControlCSV controlCSVPedido = new ControlCSV(pathP);
+        List<Pedido> Listado = new List<Pedido>();
+        Pedido pedido = new Pedido();
+        Listado = controlCSVPedido.ObtenerPedidos();
+        foreach (var item in Listado)
+        {
+            if(item.Numero == Numero)
+            {
+                pedido = item;
+            }
+        }
+        ModificarPedidoViewModel pedidoViewModel = new ModificarPedidoViewModel(pedido.Numero,pedido.Observacion);
+        return View(pedidoViewModel);
+    }
 }
