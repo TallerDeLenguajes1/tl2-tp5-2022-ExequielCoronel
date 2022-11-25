@@ -1,15 +1,22 @@
-using System;
 using System.Collections.Generic;
-namespace Cadeteria.Models;
-class CadeteViewModel
+using System;
+using System.Linq;
+using System.Threading.Tasks;
+using System.ComponentModel.DataAnnotations;
+using System.Diagnostics.CodeAnalysis;
+using Cadeteria.Models;
+namespace Cadeteria.ViewModels;
+
+
+public class CadeteViewModel
 {
-    [require]
+    [Required]
     private int id {get; set;}
-    [require] [StringLength(100)]
+    [Required] [StringLength(100)]
     private string direccion {get; set;}
-    [require] [StringLength(50)]
+    [Required] [StringLength(50)]
     private string nombre {get; set;}
-    [require] [Range(0,9223372036854775807)]
+    [Required] [Range(0,9223372036854775807)]
     private long telefono {get; set;}
     List<Pedido> Pedidos;
 

@@ -1,5 +1,5 @@
 namespace Cadeteria.Models;
-    class Cliente : Persona
+    public class Cliente : Persona
     {
         string DatosReferenciaDireccion;
 

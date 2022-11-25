@@ -1,6 +1,6 @@
 
 namespace Cadeteria.Models;
-    class Persona
+    public class Persona
     {
         private static long AI = 0;
         private long iD;

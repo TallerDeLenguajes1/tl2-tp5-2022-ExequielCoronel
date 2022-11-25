@@ -1,7 +1,6 @@
 namespace Cadeteria.Models;
-    class Pedido
+    public class Pedido
     {
-        const uint INDEFINIDO = 9999999;
         bool Estado;
         uint Numero;
         string Observacion;

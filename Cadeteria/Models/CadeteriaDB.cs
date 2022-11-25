@@ -1,6 +1,6 @@
 using System.Collections.Generic;
 namespace Cadeteria.Models;
-    class CadeteriaDB
+    public class CadeteriaDB
     {
         string Nombre;
         uint Telefono;

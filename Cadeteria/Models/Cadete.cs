@@ -1,7 +1,7 @@
 using System;
 using System.Collections.Generic;
 namespace Cadeteria.Models;
-    class Cadete:Persona
+    public class Cadete:Persona
     {
 
         List<Pedido> Pedidos;

@@ -2,12 +2,20 @@ using System;
 using System.Diagnostics;
 using Microsoft.AspNetCore.Mvc;
 using Cadeteria.Models;
-using System.IO;
-using System.Text;
+using Cadeteria.Repositorios;
 namespace Cadeteria.Controllers;
 
-public class CadeteriaDBController : Controller
+public class CadeteController : Controller
 {
+    private readonly ILogger<CadeteController> _logger;
+
+    private readonly ICadeteRepositorio _cadeteRepositorio;
+
+    public CadeteController(ICadeteRepositorio cadeteRepo, ILogger<CadeteController> logger)
+    {
+        _cadeteRepositorio = cadeteRepo;
+        _logger = logger;
+    }
 
     private string path = @"C:\Users\execo\Escritorio\Universidad\3ero\2doCuatrimestre\TallerDeLenguajesII\Practica\TPN4\tl2-tp4-2022-ExequielCoronel\Cadeteria\wwwroot\Cadetes.csv";
     public IActionResult Form()
@@ -25,9 +33,7 @@ public class CadeteriaDBController : Controller
 
     public IActionResult MostrarCadetes()
     {
-        ControlCSV controlCSV = new ControlCSV(path);
-        List<Cadete> listado = controlCSV.ObtenerLista();
-        return View(listado);
+        return View(_cadeteRepositorio.ObtenerCadetes());
     }
 
     [HttpGet]
