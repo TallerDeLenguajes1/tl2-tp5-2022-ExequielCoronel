@@ -11,13 +11,18 @@ namespace Cadeteria.ViewModels;
 public class CadeteViewModel
 {
     [Required]
-    private int id {get; set;}
+    private int id;
     [Required] [StringLength(100)]
-    private string direccion {get; set;}
+    private string direccion; 
     [Required] [StringLength(50)]
-    private string nombre {get; set;}
+    private string nombre;
     [Required] [Range(0,9223372036854775807)]
-    private long telefono {get; set;}
+    private long telefono;
+    public int Id { get => id; set => id = value; }
+    public string Direccion { get => direccion; set => direccion = value; }
+    public string Nombre { get => nombre; set => nombre = value; }
+    public long Telefono { get => telefono; set => telefono = value; }
+
     List<Pedido> Pedidos;
 
     public CadeteViewModel()
@@ -28,9 +33,9 @@ public class CadeteViewModel
     public CadeteViewModel(int Id, String Nombre, String Direccion, long Telefono)
     {
         id = Id;
-        nombre = Nombre;
-        direccion = Direccion;
-        telefono = Telefono;
+        this.Nombre = Nombre;
+        this.Direccion = Direccion;
+        this.Telefono = Telefono;
         Pedidos = new List<Pedido>();
     }
 }

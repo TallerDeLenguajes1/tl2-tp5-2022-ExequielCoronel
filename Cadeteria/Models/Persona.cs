@@ -6,11 +6,11 @@ namespace Cadeteria.Models;
         private long iD;
         private string nombre;
         private string direccion;
-        private uint telefono;
+        private long telefono;
 
         public long ID { get => iD; set => iD = value; }
         public string Nombre { get => nombre; set => nombre = value; }
-        public uint Telefono { get => telefono; set => telefono = value; }
+        public long Telefono { get => telefono; set => telefono = value; }
         public string Direccion { get => direccion; set => direccion = value; }
 
     public Persona()
@@ -21,7 +21,7 @@ namespace Cadeteria.Models;
             Telefono = 0;
         }
 
-        public Persona(string Nombre, string Direccion, uint Telefono)
+        public Persona(string Nombre, string Direccion, long Telefono)
         {
             
             this.ID = AI;
@@ -31,7 +31,7 @@ namespace Cadeteria.Models;
             AI++;
         }
 
-        public Persona(long ID,string Nombre, string Direccion, uint Telefono)
+        public Persona(long ID,string Nombre, string Direccion, long Telefono)
         {
             this.ID=ID;
             this.Nombre = Nombre;

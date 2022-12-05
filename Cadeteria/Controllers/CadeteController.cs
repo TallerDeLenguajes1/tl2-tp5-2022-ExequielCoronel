@@ -3,6 +3,7 @@ using System.Diagnostics;
 using Microsoft.AspNetCore.Mvc;
 using Cadeteria.Models;
 using Cadeteria.Repositorios;
+using Cadeteria.ViewModels;
 namespace Cadeteria.Controllers;
 
 public class CadeteController : Controller
@@ -16,18 +17,19 @@ public class CadeteController : Controller
         _cadeteRepositorio = cadeteRepo;
         _logger = logger;
     }
-
-    private string path = @"C:\Users\execo\Escritorio\Universidad\3ero\2doCuatrimestre\TallerDeLenguajesII\Practica\TPN4\tl2-tp4-2022-ExequielCoronel\Cadeteria\wwwroot\Cadetes.csv";
     public IActionResult Form()
     {
         return View();
     }
 
     [HttpPost]
-    public IActionResult Alta(IFormCollection cadete)
+    public IActionResult Alta(CadeteViewModel cadete)
     {
-        ControlCSV controlCSV = new ControlCSV(path);
-        controlCSV.EscribirEnCSV(cadete);
+        if(ModelState.IsValid)
+        {
+            Cadete nuevoCadete = new Cadete(cadete.Nombre,cadete.Direccion,cadete.Telefono);
+            _cadeteRepositorio.Alta(nuevoCadete);
+        }
         return View();
     }
 
@@ -39,9 +41,24 @@ public class CadeteController : Controller
     [HttpGet]
     public IActionResult Baja(int id)
     {
-        ControlCSV controlCSV = new ControlCSV(path);
-        controlCSV.ElminarLinea(id);
+        _cadeteRepositorio.Baja(id);
         ViewData["IDCadete"] = id;
+        return View();
+    }
+
+    [HttpGet]
+    public IActionResult Editar(long id)
+    {
+        Cadete cadete = _cadeteRepositorio.ObtenerCadetePorID(id);
+        return View(cadete);
+    }
+
+    [HttpPost]
+
+    public IActionResult ConfirmarEditado(Cadete cadete)
+    {
+        _cadeteRepositorio.Editar(cadete);
+        ViewData["IDCadete"] = cadete.ID;
         return View();
     }
 }
