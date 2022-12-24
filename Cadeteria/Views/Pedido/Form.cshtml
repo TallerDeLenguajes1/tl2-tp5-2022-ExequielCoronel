@@ -1,0 +1,21 @@
+@model Cadeteria.ViewModels.AltaPedidoViewModel
+
+@{
+    ViewData["Title"] = "Alta Pedido";
+}
+
+<h1>@ViewData["Title"]</h1>
+<form action="Alta" method="post">
+  <div class="row mb-3">
+    <label asp-for="Observacion" class="col-sm-2 col-form-label">Observación</label>
+    <div class="col-sm-10">
+      <input type="text" class="form-control" asp-for="Observacion" placeholder="Observación del Pedido">
+    </div>
+  </div>
+   <button type="submit" class="btn btn-primary">Cargar</button>
+   <button type="reset" class="btn btn-primary">Limpiar</button>
+</form>
+
+@section Scripts {
+  <partial name="_ValidationScriptsPartial" />
+}

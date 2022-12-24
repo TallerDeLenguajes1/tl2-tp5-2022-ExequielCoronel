@@ -19,6 +19,7 @@ public class CadeteController : Controller
     }
     public IActionResult Form()
     {
+        
         return View();
     }
 

@@ -24,18 +24,4 @@ public class CadeteViewModel
     public long Telefono { get => telefono; set => telefono = value; }
 
     List<Pedido> Pedidos;
-
-    public CadeteViewModel()
-    {
-        
-    }
-
-    public CadeteViewModel(int Id, String Nombre, String Direccion, long Telefono)
-    {
-        id = Id;
-        this.Nombre = Nombre;
-        this.Direccion = Direccion;
-        this.Telefono = Telefono;
-        Pedidos = new List<Pedido>();
-    }
 }

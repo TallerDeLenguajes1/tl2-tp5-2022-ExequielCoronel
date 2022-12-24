@@ -1,0 +1,35 @@
+@model List<Cadeteria.ViewModels.GetPedidoViewModel>
+@{
+    ViewData["Title"] = "Listado de pedidos";
+}
+<table class="table table-striped">
+    <caption>Pedidos</caption>
+    <thead>
+        <tr>
+            <th>Numero</th>
+            <th>Observacion</th>
+            <th>Estado</th>
+            <th>ID_Cliente</th>
+            <th>Editar</th>
+            <th>Eliminar</th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var pedido in Model)
+        {
+            <tr>
+                <td>@pedido.Numero</td>
+                <td>@pedido.Observacion</td>
+                <td>@pedido.Estado</td>
+                    @if(pedido.IdCliente == 0)
+                    {
+                        <td><a href="#"><button type="button" class="btn btn-success">Asignar Cliente</button></a></td>
+                    } else {
+                        <td>@pedido.IdCliente</td>
+                    }
+                <td><a href="Editar?id=@pedido.Numero"><button type="button" class="btn btn-warning">Editar</button></a></td>
+                <td><a href="Baja?id=@pedido.Numero"><button type="button" class="btn btn-danger">Eliminar</button></a></td>
+            </tr>
+        }
+    </tbody>
+</table>
