@@ -1,5 +1,8 @@
 @model List<Cadeteria.Models.Cliente>
 
+<h1>Asignar Cliente</h1>
+<h3>Pedido Numero: @ViewData["NumPedido"]</h3>
+
 <form action="ConfirmarAsignacionCliente" method="GET">
     
     <select name="idCliente">
@@ -13,7 +16,8 @@
         long numPedido = Convert.ToInt64(ViewData["NumPedido"]);
         <input type="hidden" name="idPedido" value="@numPedido">
     }
-    <input type="submit" value="Enviar">
+    <input type="submit" class="btn btn-success" value="Asignar">
 </form>
 
-<button type="button" class="btn btn-dark"><a href="../Cliente/Form" id="asigC">Añadir nuevo Cliente</a></button>
+<button type="button" class="btn btn-dark"><a href="../Cliente/Form" class="enlaceBoton">Añadir nuevo Cliente</a></button>
+<button type="button" class="btn btn-danger"><a href="MostrarPedidos" class="enlaceBoton">Cancelar</a></button>
