@@ -27,3 +27,17 @@ body {
   font-style: oblique;
   color:rgb(245, 24, 24);
 }
+
+#asigC{
+  color: white;
+  text-decoration: none;
+}
+
+.idB h3
+{
+  text-align: center;
+}
+
+th{
+  text-align: center;
+}

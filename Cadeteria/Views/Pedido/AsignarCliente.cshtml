@@ -1,0 +1,19 @@
+@model List<Cadeteria.Models.Cliente>
+
+<form action="ConfirmarAsignacionCliente" method="GET">
+    
+    <select name="idCliente">
+        @foreach (var cliente in Model)
+        {
+            <option value="@cliente.ID">ID: @cliente.ID, Nombre: @cliente.Nombre, Domicilio: @cliente.Direccion</option>
+        }
+    </select>
+    
+    @{
+        long numPedido = Convert.ToInt64(ViewData["NumPedido"]);
+        <input type="hidden" name="idPedido" value="@numPedido">
+    }
+    <input type="submit" value="Enviar">
+</form>
+
+<button type="button" class="btn btn-dark"><a href="../Cliente/Form" id="asigC">Añadir nuevo Cliente</a></button>

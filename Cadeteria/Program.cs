@@ -7,6 +7,7 @@ builder.Services.AddControllersWithViews();
 
 builder.Services.AddTransient<ICadeteRepositorio, CadeteRepositorio>();
 builder.Services.AddTransient<IPedidoRepositorio, PedidoRepositorio>();
+builder.Services.AddTransient<IClienteRepositorio, ClienteRepositorio>();
 
 var app = builder.Build();
 

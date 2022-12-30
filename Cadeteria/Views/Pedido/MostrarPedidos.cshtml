@@ -10,6 +10,7 @@
             <th>Observacion</th>
             <th>Estado</th>
             <th>ID_Cliente</th>
+            <th>ID_Cadete</th>
             <th>Editar</th>
             <th>Eliminar</th>
         </tr>
@@ -23,9 +24,26 @@
                 <td>@pedido.Estado</td>
                     @if(pedido.IdCliente == 0)
                     {
-                        <td><a href="#"><button type="button" class="btn btn-success">Asignar Cliente</button></a></td>
-                    } else {
-                        <td>@pedido.IdCliente</td>
+                        <td><a href="AsignarCliente?id=@pedido.Numero"><button type="button" class="btn btn-primary">Asignar Cliente</button></a></td>
+                    } 
+                    else 
+                    {
+                        <td class="idB">
+                            <h3>@pedido.IdCliente</h3>
+                            <a href="AsignarCliente?id=@pedido.Numero"><button type="button" class="btn btn-primary">Reasignar Cliente</button></a>
+                        </td>
+                    }
+                    @if(pedido.IdCadete == 0)
+                    {
+                        <td><a href="AsignarCadete?id=@pedido.Numero"><button type="button" class="btn btn-primary">Asignar Cadete</button></a></td>
+                    }
+                    else 
+                    {
+                        <td class="idB">
+                            <h3>@pedido.IdCadete</h3>
+                            <a href="AsignarCadete?id=@pedido.Numero"><button type="button" class="btn btn-primary">Reasignar Cadete</button></a>
+                        </td>
+
                     }
                 <td><a href="Editar?id=@pedido.Numero"><button type="button" class="btn btn-warning">Editar</button></a></td>
                 <td><a href="Baja?id=@pedido.Numero"><button type="button" class="btn btn-danger">Eliminar</button></a></td>
@@ -33,3 +51,4 @@
         }
     </tbody>
 </table>
+<a href="Form"><button type="button" class="btn btn-dark">Cargar Pedido</button></a>

@@ -1,0 +1,33 @@
+@model Pedido;
+@{
+    ViewData["Title"] = "Editar Pedido";
+}
+
+<h1>@ViewData["Title"]</h1>
+<form action="ConfirmarEditado" method="POST">
+  <div class="row mb-3">
+    <label for="Numero" class="col-sm-2 col-form-label">Numero: @Model.Numero</label>
+    <div class="col-sm-10">
+      <input name="Numero" id="Numero" type="hidden" class="form-control" value=@Model.Numero>
+    </div>
+  </div>
+  <div class="row mb-3">
+    <label for="Observacion" class="col-sm-2 col-form-label">Observación</label>
+    <div class="col-sm-10">
+      <input type="text" class="form-control" id="Observacion" name="Observacion" placeholder="Observación del pedido" value="@Model.Observacion">
+    </div>
+  </div>
+  @if(Model.Estado)
+  {
+    <input type="checkbox" name="Estado" id="Estado" value="true" checked>
+    <label for="Estado">Entregado</label>
+  } 
+    else 
+  {
+    <input type="checkbox" name="Estado" id="Estado" value="true">
+    <label for="Estado">Entregado</label> 
+  }
+  <br>   
+  <button type="submit" class="btn btn-primary">Confirmar</button>
+  <button type="reset" class="btn btn-primary">Reiniciar</button>
+</form>

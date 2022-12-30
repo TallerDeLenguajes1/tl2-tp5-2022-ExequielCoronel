@@ -16,18 +16,31 @@ public class GetPedidoViewModel
     long? idCliente;
     public long? IdCliente { get => idCliente; set => idCliente = value; }
 
+    long? idCadete;
+    public long? IdCadete { get => idCadete; set => idCadete = value; }
     string estado;
     public string Estado { get => estado; set => estado = value; }
 
     string observacion;
     public string Observacion { get => observacion; set => observacion = value; }
+    
 
-    public GetPedidoViewModel(long Numero, long? IDCliente, string Estado, string Observacion)
+    public GetPedidoViewModel(long Numero, long? IDCliente,long? IDCadete, string Estado, string Observacion)
     {
         numero=Numero;
         idCliente=IDCliente;
+        idCadete=IDCadete;
         estado=Estado;
         observacion=Observacion;
+    }
+
+    public GetPedidoViewModel()
+    {
+        numero=0;
+        idCliente=0;
+        idCadete=0;
+        estado="No entregado";
+        observacion="";
     }
 }
 

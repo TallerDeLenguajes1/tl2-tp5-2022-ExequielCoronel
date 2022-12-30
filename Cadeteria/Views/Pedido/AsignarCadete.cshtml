@@ -1,0 +1,19 @@
+@model List<Cadeteria.Models.Cadete>
+
+<form action="ConfirmarAsignacionCadete" method="GET">
+    
+    <select name="idCadete">
+        @foreach (var cadete in Model)
+        {
+            <option value="@cadete.ID">ID: @cadete.ID, Nombre: @cadete.Nombre</option>
+        }
+    </select>
+    
+    @{
+        long numPedido = Convert.ToInt64(ViewData["NumPedido"]);
+        <input type="hidden" name="idPedido" value="@numPedido">
+    }
+    <input type="submit" value="Enviar">
+</form>
+
+<button type="button" class="btn btn-dark"><a href="../Cadete/Form" id="asigC">Añadir nuevo Cadete</a></button>

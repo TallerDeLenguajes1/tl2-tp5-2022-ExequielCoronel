@@ -1,22 +1,17 @@
 namespace Cadeteria.Models;
     public class Pedido
     {
-        bool Estado;
-        uint Numero;
-        string Observacion;
-        Cliente cliente;
+        public bool Estado;
+        public uint Numero;
+        public string Observacion;
+        public Cliente cliente;
 
-        public bool Estado1 { get => Estado; set => Estado = value; }
-        public uint Numero1 { get => Numero; set => Numero = value; }
-        public string Observacion1 { get => Observacion; set => Observacion = value; }
-        public Cliente Cliente { get => cliente; set => cliente = value; }
-
-    public Pedido()
+        public Pedido()
         {
-            Estado1 = false;
-            Numero1 = 0;
-            Observacion1 = "";
-            Cliente = new Cliente();
+            Estado = false;
+            Numero = 0;
+            Observacion = "";
+            Cliente cliente = new Cliente();
         }
 
         public Pedido(uint Numero, string Observacion, bool estado)
@@ -27,15 +22,15 @@ namespace Cadeteria.Models;
         }
         public Pedido(uint Numero, string Observacion, string Nombre, uint telefono, string Direccion, string DatosDeReferencia)
         {
-            Estado1 = false;
-            this.Numero1 = Numero;
-            this.Observacion1 = Observacion;
+            Estado = false;
+            this.Numero = Numero;
+            this.Observacion = Observacion;
             Cliente cliente = new Cliente(DatosDeReferencia, Nombre, telefono, Direccion);
         }
 
-        public uint getNumeroPedido(){return Numero1;}
-        public bool ComprobarEstadoPedido(){return Estado1;}
+        public uint getNumeroPedido(){return Numero;}
+        public bool ComprobarEstadoPedido(){return Estado;}
 
-        public void cambiarEstadoPedido(){Estado1 = !Estado1;}
+        public void cambiarEstadoPedido(){Estado = !Estado;}
 
     }
