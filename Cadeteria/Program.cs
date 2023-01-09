@@ -8,6 +8,7 @@ builder.Services.AddControllersWithViews();
 builder.Services.AddTransient<ICadeteRepositorio, CadeteRepositorio>();
 builder.Services.AddTransient<IPedidoRepositorio, PedidoRepositorio>();
 builder.Services.AddTransient<IClienteRepositorio, ClienteRepositorio>();
+builder.Services.AddTransient<IUsuarioRepositorio, UsuarioRepositorio>();
 
 var app = builder.Build();
 
@@ -30,6 +31,6 @@ app.UseAuthorization();
 
 app.MapControllerRoute(
     name: "default",
-    pattern: "{controller=Home}/{action=Index}/{id?}");
+    pattern: "{controller=Loggin}/{action=Form}/{id?}");
 
 app.Run();

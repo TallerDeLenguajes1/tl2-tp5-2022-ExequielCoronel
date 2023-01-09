@@ -1,0 +1,35 @@
+
+@model List<Cadeteria.Models.Cliente>
+@{
+    ViewData["Title"] = "Listado de clientes";
+}
+<table class="table table-striped">
+    <caption>Clientes</caption>
+    <thead>
+        <tr>
+            <th>ID</th>
+            <th>Nombre</th>
+            <th>Dirección</th>
+            <th>Teléfono</th>
+            <th>Eliminar</th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var cliente in Model)
+        {
+            <tr>
+                <td>@cliente.ID</td>
+                <td>@cliente.Nombre</td>
+                <td>@cliente.Direccion</td>
+                @if(cliente.Telefono==0)
+                {
+                    <td>NULL</td>    
+                } else {
+                    <td>@cliente.Telefono</td>
+                }
+                <td><a href="Baja?id=@cliente.ID"><button type="button" class="btn btn-danger">Eliminar</button></a></td>
+            </tr>
+        }
+    </tbody>
+</table>
+<td><a href="Form"><button type="button" class="btn btn-dark">Cargar Cliente</button></a></td>

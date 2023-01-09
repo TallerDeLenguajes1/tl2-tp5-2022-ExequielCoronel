@@ -1,7 +1,7 @@
 namespace Cadeteria.Models;
     public class Cliente : Persona
     {
-        string DatosReferenciaDireccion;
+        public string DatosReferenciaDireccion;
 
         public Cliente():base()
         {
@@ -17,3 +17,4 @@ namespace Cadeteria.Models;
             this.DatosReferenciaDireccion = DatosReferenciaDireccion;
         }
     }
+ 
