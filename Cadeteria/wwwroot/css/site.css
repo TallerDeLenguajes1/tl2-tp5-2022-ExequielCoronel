@@ -55,3 +55,12 @@ table
 {
   box-shadow: 0.5em 0.5em 0.9em 0.1em rgb(104, 103, 103);
 }
+
+#cerrarSesion
+{
+  font-size: 1.5em;
+  color: red;
+  font-weight: bolder;
+  font-family:'Lucida Sans', 'Lucida Sans Regular', 'Lucida Grande', 'Lucida Sans Unicode', Geneva, Verdana, sans-serif;
+  text-decoration:underline;
+}

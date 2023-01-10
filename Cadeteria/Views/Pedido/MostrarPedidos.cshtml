@@ -1,6 +1,7 @@
 @model List<Cadeteria.ViewModels.GetPedidoViewModel>
 @{
     ViewData["Title"] = "Listado de pedidos";
+    int numeroPedidosCadete = 0;
 }
 <table class="table table-striped">
     <caption>Pedidos</caption>
@@ -18,37 +19,60 @@
     <tbody>
         @foreach (var pedido in Model)
         {
-            <tr>
-                <td>@pedido.Numero</td>
-                <td>@pedido.Observacion</td>
-                <td>@pedido.Estado</td>
-                    @if(pedido.IdCliente == 0)
-                    {
-                        <td><a href="AsignarCliente?id=@pedido.Numero"><button type="button" class="btn btn-primary">Asignar Cliente</button></a></td>
-                    } 
-                    else 
-                    {
-                        <td class="idB">
-                            <h3>@pedido.IdCliente</h3>
-                            <a href="AsignarCliente?id=@pedido.Numero"><button type="button" class="btn btn-primary">Reasignar Cliente</button></a>
-                        </td>
-                    }
-                    @if(pedido.IdCadete == 0)
-                    {
-                        <td><a href="AsignarCadete?id=@pedido.Numero"><button type="button" class="btn btn-primary">Asignar Cadete</button></a></td>
-                    }
-                    else 
-                    {
-                        <td class="idB">
-                            <h3>@pedido.IdCadete</h3>
-                            <a href="AsignarCadete?id=@pedido.Numero"><button type="button" class="btn btn-primary">Reasignar Cadete</button></a>
-                        </td>
+            
+            @if(Context.Session.GetInt32("rol")==1) 
+            {
+                @if(Convert.ToInt64(Context.Session.GetString("id_cadete"))==pedido.IdCadete)
+                {
+                    <tr>
+                        <td>@pedido.Numero</td>
+                        <td>@pedido.Observacion</td>
+                        <td>@pedido.Estado</td>
+                        <td><a href="Editar?id=@pedido.Numero"><button type="button" class="btn btn-warning">Editar</button></a></td>
+                    </tr>
+                    numeroPedidosCadete++;
+                }
+            } else {
+                    <tr>
+                        <td>@pedido.Numero</td>
+                        <td>@pedido.Observacion</td>
+                        <td>@pedido.Estado</td>
+                            @if(pedido.IdCliente == 0)
+                            {
+                                <td><a href="AsignarCliente?id=@pedido.Numero"><button type="button" class="btn btn-primary">Asignar Cliente</button></a></td>
+                            } 
+                            else 
+                            {
+                                <td class="idB">
+                                    <h3>@pedido.IdCliente</h3>
+                                    <a href="AsignarCliente?id=@pedido.Numero"><button type="button" class="btn btn-primary">Reasignar Cliente</button></a>
+                                </td>
+                            }
+                            @if(pedido.IdCadete == 0)
+                            {
+                                <td><a href="AsignarCadete?id=@pedido.Numero"><button type="button" class="btn btn-primary">Asignar Cadete</button></a></td>
+                            }
+                            else 
+                            {
+                                <td class="idB">
+                                    <h3>@pedido.IdCadete</h3>
+                                    <a href="AsignarCadete?id=@pedido.Numero"><button type="button" class="btn btn-primary">Reasignar Cadete</button></a>
+                                </td>
 
-                    }
-                <td><a href="Editar?id=@pedido.Numero"><button type="button" class="btn btn-warning">Editar</button></a></td>
-                <td><a href="Baja?id=@pedido.Numero"><button type="button" class="btn btn-danger">Eliminar</button></a></td>
-            </tr>
-        }
+                            }
+                        <td><a href="Editar?id=@pedido.Numero"><button type="button" class="btn btn-warning">Editar</button></a></td>
+                        <td><a href="Baja?id=@pedido.Numero"><button type="button" class="btn btn-danger">Eliminar</button></a></td>
+                    </tr>
+            }
+        }    
     </tbody>
+    
 </table>
-<a href="Form"><button type="button" class="btn btn-dark">Cargar Pedido</button></a>
+@if(numeroPedidosCadete==0 && Context.Session.GetInt32("rol")==1)
+{
+    <h3>No tiene pedidos asignados!</h3>
+}
+@if(Context.Session.GetInt32("rol") == 2)
+{
+    <a href="Form"><button type="button" class="btn btn-dark">Cargar Pedido</button></a>
+}

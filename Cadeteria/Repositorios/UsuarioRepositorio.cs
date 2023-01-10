@@ -28,17 +28,13 @@ public class UsuarioRepositorio : IUsuarioRepositorio
         var resultado = consulta.ExecuteReader();
         if(resultado.Read())
         {
-            usuario1.ID = Convert.ToInt64(resultado.GetString(4));
-            usuario1.Nombre = resultado.GetString(0);
-            usuario1.nombreUsuario = resultado.GetString(1);
-            usuario1.Password = resultado.GetString(2);
             if(resultado.GetString(3)=="Administrador")
             {
-                usuario1.Rol=0;
+                usuario1 = new Usuario(Convert.ToInt64(resultado.GetString(4)),resultado.GetString(0),resultado.GetString(1),resultado.GetString(2),2);
             } else{
                 if(resultado.GetString(3)=="Cadete")
                 {
-                    usuario1.Rol=1;
+                    usuario1 = new Usuario(Convert.ToInt64(resultado.GetString(4)),resultado.GetString(0),resultado.GetString(1),resultado.GetString(2),1);
                 }
             }
         }

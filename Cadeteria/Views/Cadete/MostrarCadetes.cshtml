@@ -3,30 +3,36 @@
 @{
     ViewData["Title"] = "Listado de cadetes";
 }
-<table class="table table-striped">
-    <caption>Cadetes</caption>
-    <thead>
-        <tr>
-            <th>ID</th>
-            <th>Nombre</th>
-            <th>Dirección</th>
-            <th>Teléfono</th>
-            <th>Editar</th>
-            <th>Eliminar</th>
-        </tr>
-    </thead>
-    <tbody>
-        @foreach (var cadete in Model)
-        {
+<h1>@ViewData["Title"]</h1>
+@if(Context.Session.GetInt32("rol")==2)
+{
+    <table class="table table-striped">
+        <caption>Cadetes</caption>
+        <thead>
             <tr>
-                <td>@cadete.ID</td>
-                <td>@cadete.Nombre</td>
-                <td>@cadete.Direccion</td>
-                <td>@cadete.Telefono</td>
-                <td><a href="Editar?id=@cadete.ID"><button type="button" class="btn btn-warning">Editar</button></a></td>
-                <td><a href="Baja?id=@cadete.ID"><button type="button" class="btn btn-danger">Eliminar</button></a></td>
+                <th>ID</th>
+                <th>Nombre</th>
+                <th>Dirección</th>
+                <th>Teléfono</th>
+                <th>Editar</th>
+                <th>Eliminar</th>
             </tr>
-        }
-    </tbody>
-</table>
-<td><a href="Form"><button type="button" class="btn btn-dark">Cargar Cadete</button></a></td>
+        </thead>
+        <tbody>
+            @foreach (var cadete in Model)
+            {
+                <tr>
+                    <td>@cadete.ID</td>
+                    <td>@cadete.Nombre</td>
+                    <td>@cadete.Direccion</td>
+                    <td>@cadete.Telefono</td>
+                    <td><a href="Editar?id=@cadete.ID"><button type="button" class="btn btn-warning">Editar</button></a></td>
+                    <td><a href="Baja?id=@cadete.ID"><button type="button" class="btn btn-danger">Eliminar</button></a></td>
+                </tr>
+            }
+        </tbody>
+     </table>
+    <td><a href="Form"><button type="button" class="btn btn-dark">Cargar Cadete</button></a></td>
+} else {
+    <h2>No posee los permisos necesarios!</h2>
+}

@@ -22,13 +22,13 @@ public class LogginController : Controller
         return View();
     }
 
-    [HttpPost]
-    public ActionResult Loggear(string usuario, string password)
+    
+    public ActionResult IniciarSesion(string usuario, string password)
     {
         Usuario usuarioLoggin = usuarioRepositorio.Loggear(usuario,password);
         if(usuarioLoggin is not null)
         {
-            HttpContext.Session.SetString("usuario", usuarioLoggin.nombreUsuario);
+            HttpContext.Session.SetString("nombre", usuarioLoggin.Nombre);
             if(usuarioLoggin.Rol==1)
             {
                 HttpContext.Session.SetString("id_cadete",Convert.ToString(usuarioLoggin.ID));
