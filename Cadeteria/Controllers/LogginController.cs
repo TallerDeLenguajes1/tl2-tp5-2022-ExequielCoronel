@@ -34,7 +34,13 @@ public class LogginController : Controller
                 HttpContext.Session.SetString("id_cadete",Convert.ToString(usuarioLoggin.ID));
             }
             HttpContext.Session.SetInt32("rol",usuarioLoggin.Rol);
-            return RedirectToAction("MostrarCadetes","Cadete");
+            if(usuarioLoggin.Rol==1)
+            {
+                return RedirectToAction("MostrarPedidos","Pedido");
+            } else {
+                return RedirectToAction("MostrarCadetes","Cadete");
+            }
+            
         } else {
             return RedirectToAction("Error", new {error = "Usuario y/o Contraseña incorrectos"});
         }

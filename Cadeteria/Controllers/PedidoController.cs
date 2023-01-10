@@ -26,82 +26,152 @@ public class PedidoController : Controller
 
     public IActionResult MostrarPedidos()
     {
-        return View(_pedidoRepositorio.ObtenerPedidos());
+        if(HttpContext.Session.GetInt32("nombre") is not null)
+        {
+            return View(_pedidoRepositorio.ObtenerPedidos());
+        } else {
+            return RedirectToAction("Error",new{error=1});
+        }
+        
     }
 
     public IActionResult Form()
     {
-        return View();
+        if(HttpContext.Session.GetInt32("rol") == 2)
+        {
+            return View();
+        }else{
+            return RedirectToAction("Error", new {error="No posee los permisos necesarios para dar de alta un pedido"});
+        }
+        
     }
 
     [HttpPost]
     public IActionResult Alta(AltaPedidoViewModel nuevoPedido)
     {
-        
-        if(ModelState.IsValid)
+        if(HttpContext.Session.GetInt32("rol")==2)
         {
-            _pedidoRepositorio.Alta(nuevoPedido);
+            if(ModelState.IsValid)
+            {
+                _pedidoRepositorio.Alta(nuevoPedido);
+            }
+            return View();
+        } else {
+            return RedirectToAction("Error", new {error="No posee los permisos necesarios para dar de alta un pedido"});
         }
-        return View();
     }
 
     [HttpGet]
     public IActionResult Baja(long id)
     {
-        _pedidoRepositorio.Baja(id);
-        ViewData["NumPedido"] = id;
-        return View();
+        if(HttpContext.Session.GetInt32("rol") == 2)
+        {
+            _pedidoRepositorio.Baja(id);
+            ViewData["NumPedido"] = id;
+            return View();
+        } else {
+            return RedirectToAction("Error", new {error="No posee los permisos necesarios para dar de baja un pedido"});
+        }
+        
     }
 
     [HttpGet]
     public IActionResult Editar(long id)
     {
-        Pedido pedido = _pedidoRepositorio.ObtenerPedidoPorNumero(id);
-        return View(pedido);
+        if(HttpContext.Session.GetInt32("rol")==2)
+        {
+            Pedido pedido = _pedidoRepositorio.ObtenerPedidoPorNumero(id);
+            return View(pedido);
+        } else {
+            return RedirectToAction("Error", new {error="No posee los permisos necesarios para editar un pedido"});
+        }
+        
     }
 
     [HttpPost]
     public IActionResult ConfirmarEditado(uint Numero, string Estado, string Observacion)
     {
-        bool estado = false;
-        if(Estado == "true")
+        if(HttpContext.Session.GetInt32("rol")==2)
         {
-            estado = true;
+            bool estado = false;
+            if(Estado == "true")
+            {
+                estado = true;
+            }
+            Pedido pedido = new Pedido(Numero, Observacion, estado);
+            _pedidoRepositorio.Editar(pedido);
+            ViewData["NumPedido"] = pedido.Numero;
+            return View();
+        } else {
+            return RedirectToAction("Error", new {error="No posee los permisos necesarios para editar un pedido"});
         }
-        Pedido pedido = new Pedido(Numero, Observacion, estado);
-        _pedidoRepositorio.Editar(pedido);
-        ViewData["NumPedido"] = pedido.Numero;
-        return View();
+        
     }
 
     [HttpGet]
     public IActionResult AsignarCliente(long id)
     {
-        List<Cliente> Clientes = _clienteRepositorio.ObtenerClientes();
-        ViewData["NumPedido"] = id;
-        return View(Clientes);
+        if(HttpContext.Session.GetInt32("rol")==2)
+        {
+            List<Cliente> Clientes = _clienteRepositorio.ObtenerClientes();
+            ViewData["NumPedido"] = id;
+            return View(Clientes);
+        } else {
+            return RedirectToAction("Error",new {error="No posee los permisos necesarios para asignar un cliente al pedido"});
+        }
     }
 
     [HttpGet]
 
     public IActionResult ConfirmarAsignacionCliente(long idCliente, long idPedido)
     {
-        _pedidoRepositorio.AsignarCliente(idPedido, idCliente);
-        return View();
+        if(HttpContext.Session.GetInt32("rol")==2)
+        {
+            _pedidoRepositorio.AsignarCliente(idPedido, idCliente);
+            return View();
+        } else {
+            return RedirectToAction("Error",new{error="No posee los permisos necesarios para asignar un cliente al pedido"});
+        }
+        
     }
 
     [HttpGet]
     public IActionResult AsignarCadete(long id)
     {
-        List<Cadete> Cadetes = _cadeteRepositorio.ObtenerCadetes();
-        ViewData["NumPedido"] = id;
-        return View(Cadetes);
+        if(HttpContext.Session.GetInt32("rol")==2)
+        {
+            List<Cadete> Cadetes = _cadeteRepositorio.ObtenerCadetes();
+            ViewData["NumPedido"] = id;
+            return View(Cadetes);
+        } else {
+            return RedirectToAction("Error",new{error="No posee los permisos necesarios para asignar un cadete al pedido"});
+        }
+        
     }
 
     [HttpGet]
     public IActionResult ConfirmarAsignacionCadete(long idCadete, long idPedido)
     {
-        _pedidoRepositorio.AsignarCadete(idPedido, idCadete);
+        if(HttpContext.Session.GetInt32("rol")==2)
+        {
+            _pedidoRepositorio.AsignarCadete(idPedido, idCadete);
+            return View();
+        } else {
+            return RedirectToAction("Error",new{error="No posee los permisos necesarios para asignar un cadete al pedido"});
+        }
+        
+    }
+
+    public ActionResult Error(string error)
+    {
+        if(error=="1")
+        {
+            ViewData["error"]="No inicio Sessión";
+            ViewData["NumError"]=1;
+        } else {
+            ViewData["error"]=error;
+        }
+        
         return View();
     }
 }

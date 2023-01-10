@@ -1,23 +1,31 @@
 @{
-    ViewData["Title"] = "Error Loggin";
+    ViewData["Title"] = "Error Pedido";
     Layout = null;
 }
 
 <!DOCTYPE html>
 <html lang="es">
 <head>
+    @{
+        string rutaPagina="../Pedido/MostrarPedidos";
+        if(Convert.ToInt64(ViewData["NumError"]) == 1)
+        {
+            rutaPagina="../Loggin/Form";
+        }
+    }
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="../../wwwroot/css/site.css">
     <title>@ViewData["Title"]</title>
     <script>
-        function redireccionar(){window.location="Form";}
+        function redireccionar(){window.location="@rutaPagina";}
         setTimeout ("redireccionar()", 5000);
     </script>
 </head>
 <body>
     <main style="text-align: center;">
-        <h2 style="font-size: 3em; color:red;">Error de logeo!</h2>
+        <h2 style="font-size: 3em; color:red;">Error en el pedido!</h2>
         <p style="font-weight: bold; font-size:2em">Información: @ViewData["error"]</p>
         <p style="font-size: 1.5em; border:0.1em solid black">Redirigiendo en 5 Segundos...</p>
     </main>

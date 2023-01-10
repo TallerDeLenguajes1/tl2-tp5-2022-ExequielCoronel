@@ -19,47 +19,89 @@ public class CadeteController : Controller
     }
     public IActionResult Form()
     {
+        if(HttpContext.Session.GetInt32("rol")==2)
+        {
+            return View();
+        }else{
+            return RedirectToAction("Error",new{error="No posee los permisos necesarios para dar de alta un cadete"});
+        }
         
-        return View();
     }
 
     [HttpPost]
     public IActionResult Alta(CadeteViewModel cadete)
     {
-        if(ModelState.IsValid)
+        if(HttpContext.Session.GetInt32("rol")==2) 
         {
-            Cadete nuevoCadete = new Cadete(cadete.Nombre,cadete.Direccion,cadete.Telefono);
-            _cadeteRepositorio.Alta(nuevoCadete);
+            if(ModelState.IsValid)
+            {
+                Cadete nuevoCadete = new Cadete(cadete.Nombre,cadete.Direccion,cadete.Telefono);
+                _cadeteRepositorio.Alta(nuevoCadete);
+            }
+            return View();
+        } else {
+            return RedirectToAction("Error",new{error="No posee los permisos necesarios para dar de alta un cadete"});
         }
-        return View();
+       
     }
 
     public IActionResult MostrarCadetes()
     {
-        return View(_cadeteRepositorio.ObtenerCadetes());
+        if(HttpContext.Session.GetInt32("rol")==2) 
+        {
+            return View(_cadeteRepositorio.ObtenerCadetes());
+        } else {
+            return RedirectToAction("Error",new{error="No posee los permisos necesarios para ver los cadetes"});
+        }
+        
     }
 
     [HttpGet]
     public IActionResult Baja(int id)
     {
-        _cadeteRepositorio.Baja(id);
-        ViewData["IDCadete"] = id;
-        return View();
+        if(HttpContext.Session.GetInt32("rol")==2) 
+        {
+            _cadeteRepositorio.Baja(id);
+            ViewData["IDCadete"] = id;
+            return View();
+        } else {
+            return RedirectToAction("Error",new{error="No posee los permisos necesarios para dar de baja un cadete"});
+        }
+        
     }
 
     [HttpGet]
     public IActionResult Editar(long id)
     {
-        Cadete cadete = _cadeteRepositorio.ObtenerCadetePorID(id);
-        return View(cadete);
+        if(HttpContext.Session.GetInt32("rol")==2)
+        {
+            Cadete cadete = _cadeteRepositorio.ObtenerCadetePorID(id);
+            return View(cadete);
+        } else {
+            return RedirectToAction("Error",new{error="No posee los permisos necesarios para editar un cadete"});
+        }
+
+        
     }
 
     [HttpPost]
 
     public IActionResult ConfirmarEditado(Cadete cadete)
     {
-        _cadeteRepositorio.Editar(cadete);
-        ViewData["IDCadete"] = cadete.ID;
+        if(HttpContext.Session.GetInt32("rol")==2) 
+        {
+            _cadeteRepositorio.Editar(cadete);
+            ViewData["IDCadete"] = cadete.ID;
+            return View();
+        } else {
+            return RedirectToAction("Error",new {error="No posee los permisos necesarios para editar un cadete"});
+        }
+        
+    }
+
+    public ActionResult Error(string error)
+    {
+        ViewData["error"]=error;
         return View();
     }
 }

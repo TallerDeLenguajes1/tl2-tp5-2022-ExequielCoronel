@@ -1,5 +1,5 @@
 @{
-    ViewData["Title"] = "Error Loggin";
+    ViewData["Title"] = "Error Cadete";
     Layout = null;
 }
 
@@ -10,16 +10,17 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>@ViewData["Title"]</title>
+    <link rel="stylesheet" href="../../wwwroot/css/site.css">
     <script>
-        function redireccionar(){window.location="Form";}
+        function redireccionar(){window.location="../Pedido/MostrarPedidos";}
         setTimeout ("redireccionar()", 5000);
     </script>
 </head>
 <body>
     <main style="text-align: center;">
-        <h2 style="font-size: 3em; color:red;">Error de logeo!</h2>
+        <h2 style="font-size: 3em; color:red;">Error Cadete!</h2>
         <p style="font-weight: bold; font-size:2em">Información: @ViewData["error"]</p>
-        <p style="font-size: 1.5em; border:0.1em solid black">Redirigiendo en 5 Segundos...</p>
+        <p style="font-size: 1.5em; border:0.1em solid black">Mostrando Pedidos en 5 Segundos...</p>
     </main>
 </body>
 </html>
