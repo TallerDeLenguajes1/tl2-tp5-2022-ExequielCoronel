@@ -78,7 +78,7 @@ public class PedidoController : Controller
     [HttpGet]
     public IActionResult Editar(long id)
     {
-        if(HttpContext.Session.GetInt32("rol")==2)
+        if(HttpContext.Session.GetInt32("rol")==2 || HttpContext.Session.GetInt32("rol")==1)
         {
             Pedido pedido = _pedidoRepositorio.ObtenerPedidoPorNumero(id);
             return View(pedido);
@@ -91,7 +91,7 @@ public class PedidoController : Controller
     [HttpPost]
     public IActionResult ConfirmarEditado(uint Numero, string Estado, string Observacion)
     {
-        if(HttpContext.Session.GetInt32("rol")==2)
+        if(HttpContext.Session.GetInt32("rol")==2 || HttpContext.Session.GetInt32("rol")==1)
         {
             bool estado = false;
             if(Estado == "true")

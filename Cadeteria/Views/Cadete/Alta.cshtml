@@ -1,13 +1,22 @@
 
 @{
-    ViewData["title"] = "Alta Usuario";
+    ViewData["title"] = "Alta Cadete";
 }
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>@ViewData["title"]</title>
+    <script>
+        function redireccionar(){window.location="MostrarCadetes";}
+        setTimeout ("redireccionar()", 4000);
+    </script>
+</head>
+<body>
+    <h1>@ViewData["title"]</h1>
+    <h2>Se cargo el cadete con exito!</h2>  
+</body>
+</html>
 
-<h1>@ViewData["title"]</h1>
-<h2>Se cargo el cadete con exito!</h2>
-
-
-<script LANGUAGE=javascript>
-    document.write("Regresando a la pagina anterior...");
-    setTimeout("window.history.go(-1)",2000);
-</script>
