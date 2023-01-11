@@ -26,7 +26,7 @@ public class PedidoController : Controller
 
     public IActionResult MostrarPedidos()
     {
-        if(HttpContext.Session.GetInt32("nombre") is not null)
+        if(HttpContext.Session.GetString("nombre") is not null)
         {
             return View(_pedidoRepositorio.ObtenerPedidos());
         } else {
