@@ -91,17 +91,44 @@ public class PedidoController : Controller
     [HttpPost]
     public IActionResult ConfirmarEditado(uint Numero, string Estado, string Observacion)
     {
-        if(HttpContext.Session.GetInt32("rol")==2 || HttpContext.Session.GetInt32("rol")==1)
+        if(HttpContext.Session.GetInt32("rol")==2 || HttpContext.Session.GetInt32("rol") == 1)
         {
             bool estado = false;
-            if(Estado == "true")
+            if(HttpContext.Session.GetInt32("rol")==1)
             {
-                estado = true;
-            }
-            Pedido pedido = new Pedido(Numero, Observacion, estado);
-            _pedidoRepositorio.Editar(pedido);
-            ViewData["NumPedido"] = pedido.Numero;
-            return View();
+                GetPedidoViewModel pedidoViewModel = new GetPedidoViewModel();
+                List<GetPedidoViewModel> pedidos=_pedidoRepositorio.ObtenerPedidos();
+                foreach (var pedido in pedidos)
+                {
+                    if(pedido.Numero == Numero)
+                    {
+                        pedidoViewModel = pedido;
+                    }
+                }
+                if(pedidoViewModel.IdCadete == Convert.ToInt64(HttpContext.Session.GetString("id_cadete")))
+                {
+                    if(Estado == "true")
+                    {
+                        estado = true;
+                    }
+                    Pedido pedido = new Pedido(Numero, Observacion, estado);
+                    _pedidoRepositorio.Editar(pedido);
+                    ViewData["NumPedido"] = pedido.Numero;
+                    return View();  
+                } else {
+                    return RedirectToAction("Error", new {error="No posee los permisos necesarios para editar el pedido"});
+                }
+            } else {
+                
+                if(Estado == "true")
+                {
+                    estado = true;
+                }
+                Pedido pedido = new Pedido(Numero, Observacion, estado);
+                _pedidoRepositorio.Editar(pedido);
+                ViewData["NumPedido"] = pedido.Numero;
+                return View();
+            } 
         } else {
             return RedirectToAction("Error", new {error="No posee los permisos necesarios para editar un pedido"});
         }
